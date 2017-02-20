@@ -14,10 +14,14 @@ class HTMLSermonAudioController: UIViewController, WKNavigationDelegate {
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.pinchGestureRecognizer?.isEnabled = false
         NotificationCenter.default.addObserver(self, selector: #selector(HTMLSermonAudioController.connectWithSpecifiedItem), name: urlNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HTMLSermonAudioController.reloadWebview), name: reloadAudioNotification, object: nil)
+        
     }
     
     
+    
     let urlNotification = Notification.Name("newURLIdentifier")
+    let reloadAudioNotification = Notification.Name("reloadAudio")
  
   
     
@@ -27,6 +31,13 @@ class HTMLSermonAudioController: UIViewController, WKNavigationDelegate {
         //webView.load(URLRequest(url: url))
         self.webView!.load(URLRequest(url: itemUrl as URL))
     }
+    
+    func reloadWebview(notification: NSNotification){
+        let urlAudioHome = URL(string: "https://www.thebodyofchrist.us/audioapp/142/")!
+        self.webView!.load(URLRequest(url: urlAudioHome as URL))
+        print("Reloaded")
+    }
+    
     
     
    

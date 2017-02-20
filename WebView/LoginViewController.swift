@@ -13,20 +13,11 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         webView.scrollView.pinchGestureRecognizer?.isEnabled = false
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.connectWithSpecifiedItem), name: urlNotification, object: nil)
     }
     
+ 
     
-    let urlNotification = Notification.Name("newURLIdentifier")
-    
-    
-    
-    func connectWithSpecifiedItem(notification: NSNotification){
-        let itemUrl = notification.object as! NSURL
-        
-        //webView.load(URLRequest(url: url))
-        self.webView!.load(URLRequest(url: itemUrl as URL))
-    }
+  
     
     
     
@@ -41,12 +32,18 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         
         //   webView.allowsBackForwardNavigationGestures = true
         
+        func sendReloadToWebViewController(){
+            NotificationCenter.default.post(name: WebViewController().notificationForReload, object: nil)
+        }
+        
           if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/dashboard/"){
         
          let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         
          let next = storyBoard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
          present(next, animated: true, completion: nil)
+         
+         sendReloadToWebViewController()
         
         
         // let webViewController:WebViewController = WebViewController()

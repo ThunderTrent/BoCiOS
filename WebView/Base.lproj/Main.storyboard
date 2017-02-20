@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hPb-1N-FT0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="etp-o9-WGr">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-420" y="132"/>
+            <point key="canvasLocation" x="-801" y="87"/>
         </scene>
         <!--Profile-->
         <scene sceneID="XDa-uc-bdk">
@@ -117,13 +117,69 @@
                     <view key="view" contentMode="scaleToFill" id="Ub9-fZ-9wZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="YrG-di-Tv0">
+                                <rect key="frame" x="144" y="280" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="circle-user-7.png" selectedImage="circle-user-7.png" id="mrh-ba-7s1" propertyAccessControl="none"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Profile" image="circle-user-7.png" selectedImage="circle-user-7.png" id="mrh-ba-7s1" propertyAccessControl="none"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="irn-KI-KcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885" y="86.619718309859152"/>
+            <point key="canvasLocation" x="1089" y="87"/>
+        </scene>
+        <!--More Items Table View Controller-->
+        <scene sceneID="SrO-J1-BqL">
+            <objects>
+                <tableViewController id="b5e-Ze-wKF" customClass="MoreItemsTableViewController" customModule="WebView" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qVK-gh-a8N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="i5l-rg-gT0" detailTextLabel="Cd4-Av-84h" imageView="nF7-Gg-2vM" style="IBUITableViewCellStyleValue1" id="htd-0P-Mxa">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="htd-0P-Mxa" id="9Ic-Lt-twG">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i5l-rg-gT0">
+                                            <rect key="frame" x="61" y="11" width="34" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bible.png" id="nF7-Gg-2vM">
+                                            <rect key="frame" x="15" y="6" width="31" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cd4-Av-84h">
+                                            <rect key="frame" x="261" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="b5e-Ze-wKF" id="tbL-RQ-5wf"/>
+                            <outlet property="delegate" destination="b5e-Ze-wKF" id="YOq-VX-YK2"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="gOs-bm-Xu3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ao-gV-6WI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2229" y="87"/>
         </scene>
         <!--Media Player-->
         <scene sceneID="ZTQ-kJ-LaG">
@@ -136,45 +192,36 @@
                     <view key="view" contentMode="scaleToFill" id="EnH-Mt-bYi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="JIc-pj-ueo">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Media Player" image="video-player-7.png" selectedImage="video-player-7.png" id="4Gc-M2-3YE"/>
+                    <tabBarItem key="tabBarItem" enabled="NO" title="Media Player" image="video-player-7.png" selectedImage="video-player-7.png" id="4Gc-M2-3YE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sO-2g-pux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="2039"/>
-        </scene>
-        <!--Login View Controller-->
-        <scene sceneID="FlW-d5-SQa">
-            <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="hPb-1N-FT0" customClass="LoginViewController" customModule="WebView" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Eqx-33-63s"/>
-                        <viewControllerLayoutGuide type="bottom" id="whK-iT-tad"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jy7-f3-tQr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kbd-QO-QXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3015" y="889"/>
+            <point key="canvasLocation" x="94" y="87"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="q4f-v7-93F">
             <objects>
-                <tabBarController storyboardIdentifier="tabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etp-o9-WGr" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etp-o9-WGr" customClass="BOCTabBarController" customModule="WebView" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Vd2-kj-qtB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="bottomBar" destination="Vd2-kj-qtB" id="Ib5-SN-atT"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yl7-1a-L1l"/>
                         <segue destination="t3U-4f-Qse" kind="relationship" relationship="viewControllers" id="xri-rh-9OB"/>
                         <segue destination="fLA-HZ-JRx" kind="relationship" relationship="viewControllers" id="Pi4-Zy-Twc"/>
+                        <segue destination="b5e-Ze-wKF" kind="relationship" relationship="viewControllers" id="eBd-rf-RKk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QlC-fO-l7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -331,6 +378,7 @@
     </scenes>
     <resources>
         <image name="artworkCircles" width="375" height="375"/>
+        <image name="bible.png" width="31" height="30"/>
         <image name="bkg0" width="375" height="667"/>
         <image name="circle-user-7.png" width="30" height="30"/>
         <image name="list-simple-star-7.png" width="30" height="30"/>

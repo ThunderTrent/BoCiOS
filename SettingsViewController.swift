@@ -33,6 +33,9 @@ class SettingsViewController: UIViewController, WKNavigationDelegate {
         navigationController?.isToolbarHidden = false
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
     }
     
     func openTapped() {

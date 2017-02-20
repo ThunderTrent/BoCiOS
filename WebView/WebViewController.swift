@@ -1,5 +1,5 @@
 var host = "thebodyofchrist.us"  // Domain host without http:// or www. (e.g. "google.com")
-var webviewurl = "https://www.thebodyofchrist.us/dashboard/"  //Your URL including http:// and www.
+var webviewurl = "https://www.thebodyofchrist.us/login/"  //Your URL including http:// and www.
 var uselocalhtmlfolder = "false"  //Set to "true" to use local "local-www/index.html" file instead of URL
 var openallexternalurlsinsafaribydefault = "false"  //Set to "true" to open links in Safari, which are not your domain host
 var preventoverscroll = "true"  //Set to "true" to stop the WebView bounce animation (recommended for most cases)
@@ -26,12 +26,11 @@ var becomefacebookfriendsurl = "https://www.facebook.com/BodyofChristApp/" //URL
 var imagedownloadedtitle = "Image saved to your photo gallery."  //Title label of the "Image saved to your photo gallery" dialog box
 var imagenotfound = "Image not found."  //Title label of the "Image not found" dialog box
 
-let statusbarbackgroundcolor = UIColor(red: CGFloat(0 / 255.0), green: CGFloat(0 / 255.0), blue: CGFloat(255 / 255.0), alpha: CGFloat(1.0))
-var usemystatusbarbackgroundcolor = "false"  //Set to "true" to activate the custom status bar background color
-//Use a service like "RGB Color Picker": http://www.colorpicker.com
+let statusbarbackgroundcolor = UIColor(red: CGFloat(33 / 255.0), green: CGFloat(38 / 255.0), blue: CGFloat(43 / 255.0), alpha: CGFloat(1.0))
+var usemystatusbarbackgroundcolor = "true"  //Set to "true" to activate the custom 
 
-let statusbarcolor = UIColor(red: CGFloat(225 / 255.0), green: CGFloat(0 / 255.0), blue: CGFloat(0 / 255.0), alpha: CGFloat(1.0))
-var usemystatusbarcolor = "false"
+let statusbarcolor = UIColor(red: CGFloat(255 / 255.0), green: CGFloat(255 / 255.0), blue: CGFloat(255 / 255.0), alpha: CGFloat(1.0))
+var usemystatusbarcolor = "true"
 //Set to "true" to activate the custom status bar text color (inofficial API, see http://stackoverflow.com/questions/23512700/how-to-set-text-color-of-status-bar-other-than-white-and-black) //Use a service like "RGB Color Picker": http://www.colorpicker.com }
 /************************************************************************************************************************/
 
@@ -44,6 +43,8 @@ import WebKit
 
 class WebViewController: UIViewController
 {
+    
+    
     @IBOutlet var loadingSign: UIActivityIndicatorView!
     @IBOutlet var offlineImageView: UIImageView!
     @IBOutlet var lblText1: UILabel!
@@ -54,10 +55,24 @@ class WebViewController: UIViewController
     
     var isFirstTimeLoad = true
     
+    let notificationForReload = Notification.Name("notificationForReload")
+    
+    func reloadBOCFrame(notification: NSNotification){
+        let url = URL(string: "https://www.thebodyofchrist.us/about/")!
+        let request = URLRequest(url: url)
+        self.webView!.load(request)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         isFirstTimeLoad = true
+        
+        
+
+        
+        
+        
         
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -437,15 +452,30 @@ extension WebViewController: WKNavigationDelegate
             decisionHandler(.cancel)
             return
         }
+        let urlNotification = Notification.Name("newURLIdentifier")
         
-        func sendData(url: URL){
-            NotificationCenter.default.post(name: HTMLSermonAudioController().urlNotification, object: requestURL)
+        func sendAudioURLToPlayer(url: URL){
+            NotificationCenter.default.post(name: urlNotification, object: requestURL)
+        }
+        let barEnableNotification = Notification.Name("barEnableNoti")
+        
+        func sendEnableToBar(){
+        NotificationCenter.default.post(name: barEnableNotification, object: nil)
         }
         
+        
         if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/audioapp/"){
-            tabBarController?.selectedIndex = 3
-            sendData(url: requestURL)
+            tabBarController?.selectedIndex = 1
+            sendAudioURLToPlayer(url: requestURL)
             decisionHandler(.cancel)
+            return
+        }
+        if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/dashboard/"){
+            
+            
+          sendEnableToBar()
+            decisionHandler(.allow)
+            
             return
         }
     
@@ -524,17 +554,6 @@ extension WebViewController: WKNavigationDelegate
         }
         else {
             
-            
-            /* Open specific URL "http://m.facebook.com" links in Safari START */
-           /* if ((requestURL.host != nil) && requestURL.host! == "m.facebook.com")
-            {
-                loadingSign.stopAnimating()
-                self.loadingSign.isHidden = true
-                UIApplication.shared.openURL(requestURL)
-                decisionHandler(.cancel)
-                return
-            }*/
-            /* Open specific URL "http://m.facebook.com" links in Safari END */
             
             
             

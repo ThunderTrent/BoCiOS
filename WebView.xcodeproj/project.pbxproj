@@ -23,6 +23,9 @@
 		1790532D1E51D681000FAED7 /* circle-user-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1790532C1E51D681000FAED7 /* circle-user-7.png */; };
 		1790532F1E51D716000FAED7 /* video-player-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1790532E1E51D716000FAED7 /* video-player-7.png */; };
 		179053311E51D933000FAED7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179053301E51D933000FAED7 /* LoginViewController.swift */; };
+		179053331E553D29000FAED7 /* BOCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179053321E553D29000FAED7 /* BOCTabBarController.swift */; };
+		17DA46561E58031900DAA35E /* MoreItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA46551E58031900DAA35E /* MoreItemsTableViewController.swift */; };
+		17DA46581E58034500DAA35E /* MoreMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DA46571E58034500DAA35E /* MoreMenuItems.swift */; };
 		17DDDBDA1E50790D00C3B7ED /* BoCAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DDDBD91E50790D00C3B7ED /* BoCAudioController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,9 @@
 		1790532C1E51D681000FAED7 /* circle-user-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle-user-7.png"; path = "../../../iconbeast-lite-200/iconbeast lite 200 - png/circle-user-7.png"; sourceTree = "<group>"; };
 		1790532E1E51D716000FAED7 /* video-player-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "video-player-7.png"; path = "../../../iconbeast-lite-200/iconbeast lite 200 - png/video-player-7.png"; sourceTree = "<group>"; };
 		179053301E51D933000FAED7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		179053321E553D29000FAED7 /* BOCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BOCTabBarController.swift; sourceTree = "<group>"; };
+		17DA46551E58031900DAA35E /* MoreItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreItemsTableViewController.swift; sourceTree = "<group>"; };
+		17DA46571E58034500DAA35E /* MoreMenuItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreMenuItems.swift; sourceTree = "<group>"; };
 		17DDDBD91E50790D00C3B7ED /* BoCAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoCAudioController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +92,9 @@
 				17DDDBD91E50790D00C3B7ED /* BoCAudioController.swift */,
 				1790532C1E51D681000FAED7 /* circle-user-7.png */,
 				10B89A4F1E10D81800AC667C /* Main.storyboard */,
+				17DA46551E58031900DAA35E /* MoreItemsTableViewController.swift */,
+				17DA46571E58034500DAA35E /* MoreMenuItems.swift */,
+				179053321E553D29000FAED7 /* BOCTabBarController.swift */,
 				179053301E51D933000FAED7 /* LoginViewController.swift */,
 				10B89A521E10D81800AC667C /* Assets.xcassets */,
 				170CC7301E4E056800970B4F /* bible.png */,
@@ -180,12 +189,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179053331E553D29000FAED7 /* BOCTabBarController.swift in Sources */,
 				179053311E51D933000FAED7 /* LoginViewController.swift in Sources */,
 				10B89A5E1E10DB1700AC667C /* WebViewController.swift in Sources */,
 				17DDDBDA1E50790D00C3B7ED /* BoCAudioController.swift in Sources */,
 				17701D4E1E50857A00A37E61 /* BackgroundsVC.swift in Sources */,
 				10B89A4C1E10D81800AC667C /* AppDelegate.swift in Sources */,
 				176AE43A1E4DF67800A34B4E /* SettingsViewController.swift in Sources */,
+				17DA46561E58031900DAA35E /* MoreItemsTableViewController.swift in Sources */,
+				17DA46581E58034500DAA35E /* MoreMenuItems.swift in Sources */,
 				171A69DC1E50BC0400E195F7 /* HTMLSermonAudioController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L86FX6K39Y;
 				INFOPLIST_FILE = WebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -326,6 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = L86FX6K39Y;
 				INFOPLIST_FILE = WebView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
