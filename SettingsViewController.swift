@@ -3,7 +3,6 @@ import WebKit
 
 class SettingsViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
-    var progressView: UIProgressView!
     
     var websites = ["www.thebodyofchrist.us/settings/"]
     
@@ -13,41 +12,31 @@ class SettingsViewController: UIViewController, WKNavigationDelegate {
         view = webView
     }
     
+    let urlNotificationRegistrationForm = Notification.Name("newURLIdentifierRegistrationForm")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let url = URL(string: "https://" + websites[0])!
         webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = false
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
-        
-        progressView = UIProgressView(progressViewStyle: .default)
-        progressView.sizeToFit()
-        let progressButton = UIBarButtonItem(customView: progressView)
-        
-        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
-        
-        toolbarItems = [progressButton, spacer, refresh]
-        navigationController?.isToolbarHidden = false
-        
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        URLCache.shared.removeAllCachedResponses()
-        URLCache.shared.diskCapacity = 0
-        URLCache.shared.memoryCapacity = 0
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(SettingsViewController.openRegistrationForm), name: urlNotificationRegistrationForm, object: nil)
+
+     
     }
     
-    func openTapped() {
-        let ac = UIAlertController(title: "Open page…", message: nil, preferredStyle: .actionSheet)
-        
-        for website in websites {
-            ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
-        }
-        
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(ac, animated: true)
+    func openRegistrationForm(notification: NSNotification){
+        self.webView!.stopLoading()
+        //self.webView!.lo
+        print("test")
+        let itemUrl = notification.object as! NSURL
+        self.webView!.load(URLRequest(url: itemUrl as URL))
     }
+    
+    
+  
     
     func openPage(action: UIAlertAction) {
         let url = URL(string: "https://" + action.title!)!
@@ -59,16 +48,42 @@ class SettingsViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    decisionHandler(.allow)
+    
+        let requestURL = navigationAction.request.url!
+        
+        let reloadDashboardNotification = Notification.Name("reloadDashboard")
+        
+        let barEnableNotification = Notification.Name("barEnableNoti")
+        
+        func reloadDashboard(){
+            NotificationCenter.default.post(name: reloadDashboardNotification, object: nil)
+        }
+        
+        func sendEnableToBar(){
+            NotificationCenter.default.post(name: barEnableNotification, object: nil)
+        }
+        
+        if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/dashboard/"){
+            sendEnableToBar()
+            reloadDashboard()
+            tabBarController?.selectedIndex = 0
+            decisionHandler(.cancel)
+            
+        }
+        else{
+        decisionHandler(.allow)
+        }
         
 
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            progressView.progress = Float(webView.estimatedProgress)
+    override func viewDidAppear(_ animated: Bool) {
+        if (webView.title?.isEmpty)!{
+           //webView.reload()
         }
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

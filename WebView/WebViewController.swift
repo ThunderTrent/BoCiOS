@@ -6,8 +6,8 @@ var preventoverscroll = "true"  //Set to "true" to stop the WebView bounce anima
 var deletechache = "false"  //Set to "true" to delete the chache while starting the app
 var okbutton = "OK"  //Text label of the "OK" buttons
 var useragent = "BoC_Browser"  //Customized UserAgent for WebView URL requests (leave it empty to use the default iOS UserAgent)
-var firstrunmessagetitle = "Welcome!"  //Title label of the "First run" alert box
-var firstrunmessage = "Thank you for downloading this app!" //Text label of the "First run" a/Users/trentbrown/Downloads/Settings-icon.pnglert box
+var firstrunmessagetitle = "Grace and Peace Be Multiplied!"  //Title label of the "First run" alert box
+var firstrunmessage = "Forever Free, No Premium Membership Features. Prayer and Feedback Welcome! " //Text label of the "First run" a/Users/trentbrown/Downloads/Settings-icon.pnglert box
 var offlinetitle = "Connection Error"  //Title label of the "Offline" alert box
 var offlinemsg = "Please check your connection -- Possibly down for development."  //Text of the "Offline" alert box
 var screen1 = "@iTrent - for updates"  //Text label 1 of the "Offline" screen
@@ -17,14 +17,15 @@ var ratemyapptitle = "Rate / Share the Body of Christ App?"  //Title label of th
 var ratemyapptext = "Will only take a few seconds..."  //Text label of the "Rate my app" dialog
 var ratemyappyes = "Rate"  //Text label of the "Yes" button on "Rate my app" dialog box
 var ratemyappno = "No"  //Text label of the "No" button on "Rate my app" dialog box
-var ratemyappurl = "http://itunes.apple.com"  //Your App Store URL for the "Rate my app" dialog (there is a "View in App Store" link in iTunes Connect)
+var ratemyappurl = "https://itunes.apple.com/us/app/body-of-christ/id1091374164?ls=1&mt=8" 
 var becomefacebookfriendstitle = "Stay tuned"  //Title label of the "Follow on Facebook" dialog
-var becomefacebookfriendstext = "Become friends on Facebook?"  //Text label of the "Follow on Facebook" dialog
+var becomefacebookfriendstext = "Follow The Body friends on Facebook?"  //Text label of the "Follow on Facebook" dialog
 var becomefacebookfriendsyes = "Yes"  //Text label of the "Yes" button of the "Follow on Facebook" dialog
 var becomefacebookfriendsno = "No"  //Text label of the "No" button of the "Follow on Facebook" dialog
 var becomefacebookfriendsurl = "https://www.facebook.com/BodyofChristApp/" //URL of your Facebook fanpage
 var imagedownloadedtitle = "Image saved to your photo gallery."  //Title label of the "Image saved to your photo gallery" dialog box
 var imagenotfound = "Image not found."  //Title label of the "Image not found" dialog box
+var registerlocalpush = "true"
 
 let statusbarbackgroundcolor = UIColor(red: CGFloat(33 / 255.0), green: CGFloat(38 / 255.0), blue: CGFloat(43 / 255.0), alpha: CGFloat(1.0))
 var usemystatusbarbackgroundcolor = "true"  //Set to "true" to activate the custom 
@@ -56,6 +57,7 @@ class WebViewController: UIViewController
     var isFirstTimeLoad = true
     
     let notificationForReload = Notification.Name("notificationForReload")
+    let barDisableNotification = Notification.Name("barDisableNoti")
     
     func reloadBOCFrame(notification: NSNotification){
         let url = URL(string: "https://www.thebodyofchrist.us/about/")!
@@ -63,13 +65,34 @@ class WebViewController: UIViewController
         self.webView!.load(request)
     }
     
+    func sendDisableToBar(){
+        NotificationCenter.default.post(name: barDisableNotification, object: nil)
+    }
+    
+    let reloadDashboardNotification = Notification.Name("reloadDashboard")
+    
+    func reloadWebview(notification: NSNotification){
+        sendDisableToBar()
+        let urlDashboard = URL(string: "https://www.thebodyofchrist.us/logout/")!
+        self.webView!.load(URLRequest(url: urlDashboard as URL))
+        print("Loaded Dashboard")
+        
+    }
+    
+   
+    
     override func viewDidLoad()
     {
+        
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.reloadWebview), name: reloadDashboardNotification, object: nil)
+        
         super.viewDidLoad()
         isFirstTimeLoad = true
         
         
-
+      
         
         
         
@@ -146,7 +169,7 @@ class WebViewController: UIViewController
         
         if deletechache.isEqual("true")
         {
-            URLCache.shared.removeAllCachedResponses()
+           // URLCache.shared.removeAllCachedResponses()
         }
         
         view.bringSubview(toFront: loadingSign)
@@ -193,6 +216,23 @@ class WebViewController: UIViewController
         self.perform(#selector(self.checkForAlertDisplay), with: nil, afterDelay: 0.5)
     }
 
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        AppUtility.lockOrientation(.portrait)
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        AppUtility.lockOrientation(.all)
+    }
+    private func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    
     func addWebViewToMainView()
     {
         view.addSubview(webView)
@@ -249,35 +289,7 @@ class WebViewController: UIViewController
             }
         }
         
-        if !user.bool(forKey: "becomefbfriends")
-        {
-            if randnum == 2
-            {
-                user.set("1", forKey: "becomefbfriends")
-                user.synchronize()
-                
-                let alertController = UIAlertController(title: becomefacebookfriendstitle, message: becomefacebookfriendstext, preferredStyle: UIAlertControllerStyle.alert)
-                
-                let yesAction = UIAlertAction(title: becomefacebookfriendsyes, style: UIAlertActionStyle.default, handler: {
-                    alert -> Void in
-                    
-                    let prefeedback = becomefacebookfriendsurl
-                    let feedback = URL(string: prefeedback)!
-                    UIApplication.shared.openURL(feedback)
-                    
-                })
-                
-                let noAction = UIAlertAction(title: becomefacebookfriendsno, style: UIAlertActionStyle.cancel, handler: {
-                    (action : UIAlertAction!) -> Void in
-                    
-                })
-                
-                alertController.addAction(yesAction)
-                alertController.addAction(noAction)
-                
-                self.present(alertController, animated: true, completion: nil)
-            }
-        }
+       
         
         if !user.bool(forKey: "firstrun")
         {
@@ -296,6 +308,7 @@ class WebViewController: UIViewController
             self.present(alertController, animated: true, completion: nil)
         }
     }
+    
     
     func setStatusBarColor(_ color: UIColor) -> Bool
     {
@@ -380,6 +393,13 @@ class WebViewController: UIViewController
         super.didReceiveMemoryWarning()
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+    }
+    
+    
+    
+    
 
 }
 
@@ -426,6 +446,10 @@ extension WebViewController: WKNavigationDelegate
         }
     }
     
+    
+  
+   
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     {
         let requestURL = navigationAction.request.url!
@@ -453,15 +477,26 @@ extension WebViewController: WKNavigationDelegate
             return
         }
         let urlNotification = Notification.Name("newURLIdentifier")
+        let urlNotificationRegistrationForm = Notification.Name("newURLIdentifierRegistrationForm")
         
         func sendAudioURLToPlayer(url: URL){
             NotificationCenter.default.post(name: urlNotification, object: requestURL)
         }
+        
+        
+        
+        func sendRegistrationToSettings(url: URL){
+            NotificationCenter.default.post(name: urlNotificationRegistrationForm, object: requestURL)
+        }
+        
         let barEnableNotification = Notification.Name("barEnableNoti")
+        
+       
         
         func sendEnableToBar(){
         NotificationCenter.default.post(name: barEnableNotification, object: nil)
         }
+        
         
         
         if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/audioapp/"){
@@ -471,13 +506,71 @@ extension WebViewController: WKNavigationDelegate
             return
         }
         if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/dashboard/"){
-            
-            
-          sendEnableToBar()
+            webView.allowsBackForwardNavigationGestures = true
+            sendEnableToBar()
             decisionHandler(.allow)
-            
             return
         }
+        
+        if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/registration/"){
+            //tabBarController?.selectedIndex = 2
+            //sendRegistrationToSettings(url: requestURL)
+            sendDisableToBar()
+            webView.allowsBackForwardNavigationGestures = false
+            decisionHandler(.allow)
+            return
+        }
+        print(requestURL.absoluteString)
+        if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/service/sendfriendrequest/")
+        {
+            print("friendrequest found")
+            decisionHandler(.cancel)
+        
+            var friendrequesttitle = "Friend Request Confirmation"
+            var friendrequesttext = "Are you sure you want to send?"
+            var friendYes = "Yes"
+            var friendNo = "No"
+            let alertController = UIAlertController(title: friendrequesttitle, message: friendrequesttext, preferredStyle: UIAlertControllerStyle.alert)
+            
+            let yesAction = UIAlertAction(title: friendYes, style: UIAlertActionStyle.default, handler: {
+                alert -> Void in
+                
+                decisionHandler(.cancel)
+                
+                var request = URLRequest(url: requestURL)
+                request.httpMethod = "POST"
+                let postString = ""
+                request.httpBody = postString.data(using: .utf8)
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                        print("error=\(error)")
+                        return
+                    }
+                    
+                    if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                        print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                        print("response = \(response)")
+                    }
+                    
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("responseString = \(responseString)")
+                }
+                task.resume()
+                
+            })
+            
+            let noAction = UIAlertAction(title: friendNo, style: UIAlertActionStyle.cancel, handler: {
+                (action : UIAlertAction!) -> Void in
+                decisionHandler(.cancel)
+            })
+            
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+       
     
         
         if ((requestURL.host != nil) && requestURL.host! == "push.send.cancel")
@@ -569,5 +662,12 @@ extension UIApplication
         return value(forKey: "statusBar") as? UIView
     }
 }
+
+
+//
+//override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//    return UIInterfaceOrientationMask.landscape
+//}
+
 
 

@@ -3,19 +3,57 @@ import WebKit
 
 class HTMLSermonAudioController: UIViewController, WKNavigationDelegate {
    
-    var webView: WKWebView!
+    var webView: WKWebView?
     
-    override func loadView() {
-        webView = WKWebView()
-        webView.navigationDelegate = self
-        view = webView
-        let url = URL(string: "https://www.thebodyofchrist.us/audioapp/142/")!
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
-        webView.scrollView.pinchGestureRecognizer?.isEnabled = false
+    var webConfig:WKWebViewConfiguration {
+        get {
+            
+            // Create WKWebViewConfiguration instance
+            var webCfg:WKWebViewConfiguration = WKWebViewConfiguration()
+            
+            // Setup WKUserContentController instance for injecting user script
+            var userController:WKUserContentController = WKUserContentController()
+            
+            webCfg.allowsInlineMediaPlayback = true
+            webCfg.allowsInlineMediaPlayback = true
+            webCfg.ignoresViewportScaleLimits = false
+            webCfg.userContentController = userController;
+            
+            return webCfg;
+        }
+    }
+
+    
+    override func viewDidLoad() {
+        webView = WKWebView (frame: self.view.frame, configuration: webConfig)
+        webView!.navigationDelegate = self
+        view = webView!
+        let url = URL(string: "https://www.thebodyofchrist.us/videoapp/?sermonID=31177")!
+        webView!.load(URLRequest(url: url))
+        
+        webView!.allowsBackForwardNavigationGestures = true
+        webView!.scrollView.pinchGestureRecognizer?.isEnabled = false
         NotificationCenter.default.addObserver(self, selector: #selector(HTMLSermonAudioController.connectWithSpecifiedItem), name: urlNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HTMLSermonAudioController.reloadWebview), name: reloadAudioNotification, object: nil)
         
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        print("left")
+    
+        super.viewDidLoad()
+        
+        
+        
+        
+    }
+    
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeLeft
+    }
+   
+    
+    func applicationDidBecomeActive(notification: NSNotification) {
+        webView!.reload()
     }
     
     
@@ -33,9 +71,15 @@ class HTMLSermonAudioController: UIViewController, WKNavigationDelegate {
     }
     
     func reloadWebview(notification: NSNotification){
-        let urlAudioHome = URL(string: "https://www.thebodyofchrist.us/audioapp/142/")!
+        let urlAudioHome = URL(string: "https://www.thebodyofchrist.us/videoapp/?sermonID=31177")!
         self.webView!.load(URLRequest(url: urlAudioHome as URL))
         print("Reloaded")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (webView!.title?.isEmpty)!{
+            webView!.reload()
+        }
     }
     
     
