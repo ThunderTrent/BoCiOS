@@ -41,6 +41,7 @@ import UIKit
 import AVFoundation
 import UserNotifications
 import WebKit
+import Foundation
 
 class WebViewController: UIViewController
 {
@@ -52,6 +53,9 @@ class WebViewController: UIViewController
     @IBOutlet var lblText2: UILabel!
     @IBOutlet var btnTry: UIButton!
     @IBOutlet var statusbarView: UIView!
+    
+ 
+    
     var webView: WKWebView!
     
     var isFirstTimeLoad = true
@@ -505,10 +509,58 @@ extension WebViewController: WKNavigationDelegate
             decisionHandler(.cancel)
             return
         }
+       
+        if requestURL.absoluteString.hasPrefix("share://"){
+            decisionHandler(.cancel)
+            let shareURL = requestURL.absoluteString
+            let textToShareB = shareURL.components(separatedBy: "//")[1]
+            let textToShareA = "Check this out when you can: "
+            let textToShareC = textToShareA + "https://www." + textToShareB
+            
+            let objectsToShare = [textToShareC]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare , applicationActivities: nil)
+            
+            self.present(activityVC, animated: true, completion: nil)
+        
+        
+        return
+    }
         if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/dashboard/"){
             webView.allowsBackForwardNavigationGestures = true
             sendEnableToBar()
             decisionHandler(.allow)
+            let test = UserDefaults.standard.string(forKey : "deviceToken")
+            let a = "https://www.thebodyofchrist.us/endpoint/register/?deviceToken="
+            let b =  test! as! String
+            let c = a + b
+            print(c)
+            let deviceTokenURL = URL(string: c)
+
+            
+            var request = URLRequest(url: deviceTokenURL!)
+            request.httpMethod = "POST"
+            let postString = ""
+            request.httpBody = postString.data(using: .utf8)
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                    print("error=\(error)")
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                    print("response = \(response)")
+                }
+                
+                let responseString = String(data: data, encoding: .utf8)
+                print("responseString = \(responseString)")
+            }
+            task.resume()
+            
+            
+            
+            
             return
         }
         
