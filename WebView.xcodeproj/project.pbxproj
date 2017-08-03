@@ -13,7 +13,6 @@
 		10B89A561E10D81800AC667C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B89A541E10D81800AC667C /* LaunchScreen.storyboard */; };
 		10B89A5E1E10DB1700AC667C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89A5D1E10DB1700AC667C /* WebViewController.swift */; };
 		171A69DC1E50BC0400E195F7 /* HTMLSermonAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A69DB1E50BC0400E195F7 /* HTMLSermonAudioController.swift */; };
-		1737B4E51E68175E007FFF6F /* Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1737B4E41E68175E007FFF6F /* Launch.jpg */; };
 		1737B4E91E681A24007FFF6F /* BoC_white_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 1737B4E81E681A24007FFF6F /* BoC_white_large.png */; };
 		175D98971E5D1B0000AA31AE /* moreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D98961E5D1B0000AA31AE /* moreViewController.swift */; };
 		176AE43A1E4DF67800A34B4E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176AE4391E4DF67800A34B4E /* SettingsViewController.swift */; };
@@ -33,7 +32,6 @@
 		10B89A571E10D81800AC667C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10B89A5D1E10DB1700AC667C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		171A69DB1E50BC0400E195F7 /* HTMLSermonAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLSermonAudioController.swift; sourceTree = "<group>"; };
-		1737B4E41E68175E007FFF6F /* Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Launch.jpg; path = ../../../../Desktop/Launch.jpg; sourceTree = "<group>"; };
 		1737B4E81E681A24007FFF6F /* BoC_white_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BoC_white_large.png; path = ../../../BoC_white_large.png; sourceTree = "<group>"; };
 		175D98961E5D1B0000AA31AE /* moreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreViewController.swift; sourceTree = "<group>"; };
 		175D98981E5D60D200AA31AE /* WebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebView.entitlements; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 				177A52501E6A15E200425B85 /* AppUtility.swift */,
 				1790532C1E51D681000FAED7 /* circle-user-7.png */,
 				10B89A4F1E10D81800AC667C /* Main.storyboard */,
-				1737B4E41E68175E007FFF6F /* Launch.jpg */,
 				175D98961E5D1B0000AA31AE /* moreViewController.swift */,
 				179053321E553D29000FAED7 /* BOCTabBarController.swift */,
 				1737B4E81E681A24007FFF6F /* BoC_white_large.png */,
@@ -168,7 +165,6 @@
 				10B89A531E10D81800AC667C /* Assets.xcassets in Resources */,
 				1737B4E91E681A24007FFF6F /* BoC_white_large.png in Resources */,
 				1790532D1E51D681000FAED7 /* circle-user-7.png in Resources */,
-				1737B4E51E68175E007FFF6F /* Launch.jpg in Resources */,
 				1790532F1E51D716000FAED7 /* video-player-7.png in Resources */,
 				10B89A511E10D81800AC667C /* Main.storyboard in Resources */,
 				1790532B1E51D5BF000FAED7 /* list-simple-star-7.png in Resources */,

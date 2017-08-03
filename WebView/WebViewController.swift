@@ -517,10 +517,38 @@ extension WebViewController: WKNavigationDelegate
             let textToShareA = "Check this out when you can: "
             let textToShareC = textToShareA + "https://www." + textToShareB
             
-            let objectsToShare = [textToShareC]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare , applicationActivities: nil)
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad)
+            {
+                // device is ipad
+                let objectsToShare = [textToShareC]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                
+                var nav = UINavigationController(rootViewController: activityVC)
+                nav.modalPresentationStyle = UIModalPresentationStyle.popover
+                var popover = nav.popoverPresentationController as UIPopoverPresentationController!
+                let size = CGSize(width: 20, height: 20)
+                activityVC.preferredContentSize = size
+                popover?.sourceView = self.view
+                
+                self.present(nav, animated: true, completion: nil)
+                
+            }
+            else
+            {
+                //  device is iPhone
+                let objectsToShare = [textToShareC]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare , applicationActivities: nil)
+                
+                self.present(activityVC, animated: true, completion: nil)
+                
+            }
             
-            self.present(activityVC, animated: true, completion: nil)
+            
+           
+            
+            
+            
+            
         
         
         return

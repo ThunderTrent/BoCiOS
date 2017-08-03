@@ -7,7 +7,27 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var loadedEnoughToDeepLink : Bool = false
+  
     
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        
+        if url.host == nil
+        {
+            return true;
+        }
+        print(url.absoluteString)
+        
+        let urlString = url.absoluteString
+      // Check if article
+        
+        return true
+    }
+    
+    
+    
+ 
     
    
     
