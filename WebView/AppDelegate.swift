@@ -9,25 +9,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var loadedEnoughToDeepLink : Bool = false
   
+    let openSchemaNotification = Notification.Name("openSchema")
+    
+    func sendSchemaURLToWebView(url: URL){
+        NotificationCenter.default.post(name: openSchemaNotification, object: url)
+    }
+    
+
     
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        
-        if url.host == nil
-        {
-            return true;
-        }
-        print(url.absoluteString)
-        
-        let urlString = url.absoluteString
-      // Check if article
-        
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url)
+        print("TRUE")
+        sendSchemaURLToWebView(url: url)
+        // Take decision according to URL
         return true
     }
     
-    
-    
- 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        let url = userActivity.webpageURL!
+        print(url)
+        print("TRUE1")
+        // Take decision according to URL
+        return true
+    }
     
    
     

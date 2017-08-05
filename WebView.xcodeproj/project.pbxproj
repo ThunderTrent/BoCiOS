@@ -12,14 +12,14 @@
 		10B89A531E10D81800AC667C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B89A521E10D81800AC667C /* Assets.xcassets */; };
 		10B89A561E10D81800AC667C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B89A541E10D81800AC667C /* LaunchScreen.storyboard */; };
 		10B89A5E1E10DB1700AC667C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B89A5D1E10DB1700AC667C /* WebViewController.swift */; };
+		17196D8A1F32E4EE006783DE /* circle-user-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 17196D891F32E4EE006783DE /* circle-user-7.png */; };
+		17196D8C1F32E538006783DE /* list-simple-star-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 17196D8B1F32E538006783DE /* list-simple-star-7.png */; };
+		17196D8E1F32E567006783DE /* video-player-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 17196D8D1F32E567006783DE /* video-player-7.png */; };
 		171A69DC1E50BC0400E195F7 /* HTMLSermonAudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A69DB1E50BC0400E195F7 /* HTMLSermonAudioController.swift */; };
 		1737B4E91E681A24007FFF6F /* BoC_white_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 1737B4E81E681A24007FFF6F /* BoC_white_large.png */; };
 		175D98971E5D1B0000AA31AE /* moreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D98961E5D1B0000AA31AE /* moreViewController.swift */; };
 		176AE43A1E4DF67800A34B4E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176AE4391E4DF67800A34B4E /* SettingsViewController.swift */; };
 		177A52511E6A15E200425B85 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A52501E6A15E200425B85 /* AppUtility.swift */; };
-		1790532B1E51D5BF000FAED7 /* list-simple-star-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1790532A1E51D5BF000FAED7 /* list-simple-star-7.png */; };
-		1790532D1E51D681000FAED7 /* circle-user-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1790532C1E51D681000FAED7 /* circle-user-7.png */; };
-		1790532F1E51D716000FAED7 /* video-player-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1790532E1E51D716000FAED7 /* video-player-7.png */; };
 		179053331E553D29000FAED7 /* BOCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179053321E553D29000FAED7 /* BOCTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,15 +31,15 @@
 		10B89A551E10D81800AC667C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		10B89A571E10D81800AC667C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10B89A5D1E10DB1700AC667C /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		17196D891F32E4EE006783DE /* circle-user-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle-user-7.png"; path = "../../../Downloads/circle-user-7.png"; sourceTree = "<group>"; };
+		17196D8B1F32E538006783DE /* list-simple-star-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-simple-star-7.png"; path = "../../../Downloads/list-simple-star-7.png"; sourceTree = "<group>"; };
+		17196D8D1F32E567006783DE /* video-player-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "video-player-7.png"; path = "../../../Downloads/video-player-7.png"; sourceTree = "<group>"; };
 		171A69DB1E50BC0400E195F7 /* HTMLSermonAudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLSermonAudioController.swift; sourceTree = "<group>"; };
 		1737B4E81E681A24007FFF6F /* BoC_white_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BoC_white_large.png; path = ../../../BoC_white_large.png; sourceTree = "<group>"; };
 		175D98961E5D1B0000AA31AE /* moreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = moreViewController.swift; sourceTree = "<group>"; };
 		175D98981E5D60D200AA31AE /* WebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebView.entitlements; sourceTree = "<group>"; };
 		176AE4391E4DF67800A34B4E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ../SettingsViewController.swift; sourceTree = "<group>"; };
 		177A52501E6A15E200425B85 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
-		1790532A1E51D5BF000FAED7 /* list-simple-star-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-simple-star-7.png"; path = "../../../iconbeast-lite-200/iconbeast lite 200 - png/list-simple-star-7.png"; sourceTree = "<group>"; };
-		1790532C1E51D681000FAED7 /* circle-user-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "circle-user-7.png"; path = "../../../iconbeast-lite-200/iconbeast lite 200 - png/circle-user-7.png"; sourceTree = "<group>"; };
-		1790532E1E51D716000FAED7 /* video-player-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "video-player-7.png"; path = "../../../iconbeast-lite-200/iconbeast lite 200 - png/video-player-7.png"; sourceTree = "<group>"; };
 		179053321E553D29000FAED7 /* BOCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BOCTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,17 +78,17 @@
 				10B89A4B1E10D81800AC667C /* AppDelegate.swift */,
 				10B89A5D1E10DB1700AC667C /* WebViewController.swift */,
 				177A52501E6A15E200425B85 /* AppUtility.swift */,
-				1790532C1E51D681000FAED7 /* circle-user-7.png */,
+				17196D891F32E4EE006783DE /* circle-user-7.png */,
 				10B89A4F1E10D81800AC667C /* Main.storyboard */,
 				175D98961E5D1B0000AA31AE /* moreViewController.swift */,
 				179053321E553D29000FAED7 /* BOCTabBarController.swift */,
+				17196D8B1F32E538006783DE /* list-simple-star-7.png */,
+				17196D8D1F32E567006783DE /* video-player-7.png */,
 				1737B4E81E681A24007FFF6F /* BoC_white_large.png */,
 				10B89A521E10D81800AC667C /* Assets.xcassets */,
 				10B89A541E10D81800AC667C /* LaunchScreen.storyboard */,
-				1790532A1E51D5BF000FAED7 /* list-simple-star-7.png */,
 				10B89A571E10D81800AC667C /* Info.plist */,
 				171A69DB1E50BC0400E195F7 /* HTMLSermonAudioController.swift */,
-				1790532E1E51D716000FAED7 /* video-player-7.png */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -163,11 +163,11 @@
 			files = (
 				10B89A561E10D81800AC667C /* LaunchScreen.storyboard in Resources */,
 				10B89A531E10D81800AC667C /* Assets.xcassets in Resources */,
+				17196D8E1F32E567006783DE /* video-player-7.png in Resources */,
 				1737B4E91E681A24007FFF6F /* BoC_white_large.png in Resources */,
-				1790532D1E51D681000FAED7 /* circle-user-7.png in Resources */,
-				1790532F1E51D716000FAED7 /* video-player-7.png in Resources */,
 				10B89A511E10D81800AC667C /* Main.storyboard in Resources */,
-				1790532B1E51D5BF000FAED7 /* list-simple-star-7.png in Resources */,
+				17196D8A1F32E4EE006783DE /* circle-user-7.png in Resources */,
+				17196D8C1F32E538006783DE /* list-simple-star-7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

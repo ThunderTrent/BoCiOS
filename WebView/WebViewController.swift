@@ -43,6 +43,15 @@ import UserNotifications
 import WebKit
 import Foundation
 
+struct Platform {
+    
+    static var isSimulator: Bool {
+        return TARGET_OS_SIMULATOR != 0
+    }
+    
+}
+
+
 class WebViewController: UIViewController
 {
     
@@ -83,6 +92,30 @@ class WebViewController: UIViewController
         
     }
     
+    let openSchemaNotification = Notification.Name("openSchema")
+    
+    func changeBOCwebViewURL(notification: NSNotification){
+        
+        
+        
+        let itemUrl = notification.object as! URL
+        let url = itemUrl.absoluteString
+        
+        
+        if url.range(of:"sermon") != nil{
+        let lastComponent = itemUrl.lastPathComponent
+        print(lastComponent)
+        let BoCPath = "https://www.thebodyofchrist.us/sermon/" + lastComponent + "/"
+        let finalURL = NSURL(string: BoCPath)
+        self.webView!.load(URLRequest(url: finalURL! as URL))
+        print("Loaded BoC URL")
+        }
+        else{
+        print("other than sermon load")
+        }
+        
+    }
+    
    
     
     override func viewDidLoad()
@@ -91,6 +124,8 @@ class WebViewController: UIViewController
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.reloadWebview), name: reloadDashboardNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.changeBOCwebViewURL), name: openSchemaNotification, object: nil)
         
         super.viewDidLoad()
         isFirstTimeLoad = true
@@ -557,37 +592,38 @@ extension WebViewController: WKNavigationDelegate
             webView.allowsBackForwardNavigationGestures = true
             sendEnableToBar()
             decisionHandler(.allow)
-            let test = UserDefaults.standard.string(forKey : "deviceToken")
-            let a = "https://www.thebodyofchrist.us/endpoint/register/?deviceToken="
-            let b =  test! as! String
-            let c = a + b
-            print(c)
-            let deviceTokenURL = URL(string: c)
-
             
-            var request = URLRequest(url: deviceTokenURL!)
-            request.httpMethod = "POST"
-            let postString = ""
-            request.httpBody = postString.data(using: .utf8)
-
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                    print("error=\(error)")
-                    return
-                }
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response)")
-                }
-                
-                let responseString = String(data: data, encoding: .utf8)
-                print("responseString = \(responseString)")
+            if Platform.isSimulator {
+                print("Running on Simulator")
             }
-            task.resume()
-            
-            
-            
+            else{
+                let test = UserDefaults.standard.string(forKey : "deviceToken")
+                let a = "https://www.thebodyofchrist.us/endpoint/register/?deviceToken="
+                let b =  test! as! String
+                let c = a + b
+                let deviceTokenURL = URL(string: c)
+                var request = URLRequest(url: deviceTokenURL!)
+                request.httpMethod = "POST"
+                let postString = ""
+                request.httpBody = postString.data(using: .utf8)
+                
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {
+                        print("error=\(error)")
+                        return
+                    }
+                    
+                    if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                        print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                        print("response = \(response)")
+                    }
+                    
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("responseString = \(responseString)")
+                }
+                task.resume()
+
+            }
             
             return
         }
