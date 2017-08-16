@@ -10,10 +10,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var loadedEnoughToDeepLink : Bool = false
   
     let openSchemaNotification = Notification.Name("openSchema")
+    let openUniversalNotification = Notification.Name("openUniversal")
     
     func sendSchemaURLToWebView(url: URL){
         NotificationCenter.default.post(name: openSchemaNotification, object: url)
     }
+    
+    func sendFullURLToWebView(url: URL){
+        NotificationCenter.default.post(name: openUniversalNotification, object: url)
+    }
+    
     
 
     
@@ -31,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = userActivity.webpageURL!
         print(url)
         print("TRUE1")
+        sendFullURLToWebView(url: url)
         // Take decision according to URL
         return true
     }

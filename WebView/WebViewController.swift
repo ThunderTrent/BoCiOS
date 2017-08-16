@@ -93,6 +93,7 @@ class WebViewController: UIViewController
     }
     
     let openSchemaNotification = Notification.Name("openSchema")
+    let openUniversalNotification = Notification.Name("openUniversal")
     
     func changeBOCwebViewURL(notification: NSNotification){
         
@@ -116,6 +117,14 @@ class WebViewController: UIViewController
         
     }
     
+    func changeBOCwebViewURLUniversal(notification: NSNotification){
+       print("Made it to the final function")
+        
+        let itemUrl = notification.object as! URL
+
+        self.webView!.load(URLRequest(url: itemUrl as URL))
+        
+    }
    
     
     override func viewDidLoad()
@@ -126,6 +135,8 @@ class WebViewController: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.reloadWebview), name: reloadDashboardNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.changeBOCwebViewURL), name: openSchemaNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(WebViewController.changeBOCwebViewURLUniversal), name: openUniversalNotification, object: nil)
         
         super.viewDidLoad()
         isFirstTimeLoad = true
@@ -483,6 +494,35 @@ extension WebViewController: WKNavigationDelegate
             lblText2.isHidden = false
             btnTry.isHidden = false
         }
+        guard let failingUrlStr = (error as NSError).userInfo["NSErrorFailingURLStringKey"] as? String  else { return }
+      
+        
+        let failingUrl = URL(string: failingUrlStr)!
+        
+        switch failingUrl {
+        // Needed to open Facebook
+        case _ where failingUrlStr.hasPrefix("fb:"):
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(failingUrl, options: [:], completionHandler: nil)
+                return
+            } // Else: Do nothing, iOS 9 and earlier will handle this
+            
+        // Needed to open Mail-app
+        case _ where failingUrlStr.hasPrefix("mailto:"):
+            if UIApplication.shared.canOpenURL(failingUrl) {
+                UIApplication.shared.openURL(failingUrl)
+                return
+            }
+            
+        // Needed to open Appstore-App
+        case _ where failingUrlStr.hasPrefix("itmss://itunes.apple.com/"):
+            if UIApplication.shared.canOpenURL(failingUrl) {
+                UIApplication.shared.openURL(failingUrl)
+                return
+            }
+            
+        default: break
+        }
     }
     
     
@@ -593,6 +633,11 @@ extension WebViewController: WKNavigationDelegate
             sendEnableToBar()
             decisionHandler(.allow)
             
+            return
+        }
+        
+        if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/registerdevice/"){
+            
             if Platform.isSimulator {
                 print("Running on Simulator")
             }
@@ -622,11 +667,10 @@ extension WebViewController: WKNavigationDelegate
                     print("responseString = \(responseString)")
                 }
                 task.resume()
-
+                
             }
-            
             return
-        }
+            }
         
         if requestURL.absoluteString.hasPrefix("https://www.thebodyofchrist.us/registration/"){
             //tabBarController?.selectedIndex = 2
@@ -770,6 +814,8 @@ extension WebViewController: WKNavigationDelegate
         }
     }
 }
+
+
 
 extension UIApplication
 {
